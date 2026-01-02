@@ -10,7 +10,7 @@ import Projects from "./Tabs/Projects";
 import Testimonials from "./Tabs/Testimonials";
 import Certifications from "./Tabs/Certifications";
 import Education from "./Tabs/Education";
-import { CloudDownload, Forward, Mail } from "lucide-react";
+import { CloudDownload, Forward, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import AppAvatar from "@/components/AppAvatar";
 
@@ -30,6 +30,10 @@ export default function BuilderPreview() {
         </div>
         <div className="w-full flex justify-end gap-2 items-center p-5">
           <Button variant="outline">
+            <Phone />
+            <span className="hidden md:block">Phone</span>
+          </Button>
+          <Button variant="outline">
             <Mail />
             <span className="hidden md:block">Email</span>
           </Button>
@@ -44,10 +48,14 @@ export default function BuilderPreview() {
         </div>
         <div className="p-5 absolute top-30 bottom-0 left-0 right-0 z-20 flex flex-col gap-5">
           <div className="space-y-2 shrink-0">
-            <AppAvatar src="/dummy/formal.jpg" alt="Profile" fallback="JD" />
+            <AppAvatar src="" alt="Profile" fallback="JO" />
             <div className="mt-4">
               <h1 className="text-4xl font-semibold">John Doe</h1>
               <p className="text-lg font-semibold">Software Engineer</p>
+            </div>
+            <div className="flex gap-1  items-center text-sm text-muted-foreground">
+              <MapPin size={15} />
+              <p>New York, NY</p>
             </div>
             <p className="text-sm text-muted-foreground line-clamp-3 ">
               I&apos;m a software engineer with a strong focus on backend

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import AppHeader from "@/components/AppHeader";
 import { ThemeProvider } from "@/components/theme-provider";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const nunitoSans = Nunito_Sans({ variable: "--font-sans" });
 
@@ -38,7 +39,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AppHeader />
-          {children}
+          <NuqsAdapter>{children}</NuqsAdapter>
         </ThemeProvider>
       </body>
     </html>

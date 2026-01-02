@@ -1,21 +1,38 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
+import ProfileInfo from "./Steps/ProfileInfo";
+import { useQueryState } from "nuqs";
+import WorkExperienceStep from "./Steps/WorkExperienceStep";
+import SkillsStep from "./Steps/SkillsStep";
+import ProjectsStep from "./Steps/ProjectsStep";
+import CertificationStep from "./Steps/CertificationStep";
+import EducationStep from "./Steps/EducationStep";
 
 export default function BuilderEditor() {
+  const [step, setStep] = useQueryState("step", {
+    defaultValue: "1",
+  });
+
+  const handleNext = () => {
+    const nextStep = Number(step) + 1;
+    if (nextStep > STEPS.length) return;
+    setStep(nextStep.toString());
+  };
+
+  const handlePrevious = () => {
+    if (Number(step) === 1) return;
+    const prevStep = Number(step) - 1;
+    setStep(prevStep.toString());
+  };
+
+  const handleSave = () => {
+    console.log("Save and Publish");
+  };
+
   return (
-    <div className="w-full hidden md:flex lg:w-[500px] border-r border-input h-full  flex-col">
+    <div className="w-full hidden md:flex lg:w-[500px] border-r border-input  flex-col ">
       <div className="p-4 pb-0">
         <div>
           <h1 className="text-2xl font-bold">Builder Editor</h1>
@@ -25,106 +42,79 @@ export default function BuilderEditor() {
         </div>
         <Separator className="mt-5" />
       </div>
-      <div className="flex-1 overflow-y-auto p-4">
-        <div className="flex flex-col gap-4">
-          <Field>
-            <FieldLabel>Background Image</FieldLabel>
-            <FieldContent>
-              <Input type="file" />
-            </FieldContent>
-          </Field>
-          <Field>
-            <FieldLabel>Profile Image</FieldLabel>
-            <FieldContent>
-              <Input type="file" />
-            </FieldContent>
-          </Field>
-          <div className="flex gap-2">
-            <Field>
-              <FieldLabel>First Name</FieldLabel>
-              <FieldContent>
-                <Input type="text" placeholder="Enter your name" />
-              </FieldContent>
-            </Field>
-            <Field>
-              <FieldLabel>Last Name</FieldLabel>
-              <FieldContent>
-                <Input type="text" placeholder="Enter your name" />
-              </FieldContent>
-            </Field>
-          </div>
-          <Field>
-            <FieldLabel>Job Title</FieldLabel>
-            <FieldContent>
-              <Input type="text" placeholder="Enter your job title" />
-            </FieldContent>
-          </Field>
-          <div className="flex gap-2">
-            <Field>
-              <FieldLabel>Contact Number</FieldLabel>
-              <FieldContent>
-                <Input type="text" placeholder="Enter your name" />
-              </FieldContent>
-            </Field>
-            <Field>
-              <FieldLabel>Gender</FieldLabel>
-              <FieldContent>
-                <Select>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a gender" />
-                  </SelectTrigger>
-                  <SelectContent align="end">
-                    <SelectItem value="male">Male</SelectItem>
-                    <SelectItem value="female">Female</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FieldContent>
-            </Field>
-          </div>
-          <div className="flex gap-2">
-            <Field>
-              <FieldLabel>City</FieldLabel>
-              <FieldContent>
-                <Input type="text" placeholder="Enter your name" />
-              </FieldContent>
-            </Field>
-            <Field>
-              <FieldLabel>Country</FieldLabel>
-              <FieldContent>
-                <Select>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select a gender" />
-                  </SelectTrigger>
-                  <SelectContent align="end">
-                    <SelectGroup>
-                      <SelectLabel>Asia</SelectLabel>
-                      <SelectItem value="male">Philippines</SelectItem>
-                      <SelectItem value="female">China</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </FieldContent>
-            </Field>
-          </div>
-          <Field>
-            <FieldLabel>About</FieldLabel>
-            <FieldContent>
-              <Textarea
-                placeholder="About"
-                className="w-full h-40"
-                rows={4}
-                maxLength={1000}
-              />
-            </FieldContent>
-          </Field>
-        </div>
+
+      {/* Rendered Step */}
+      <div className="flex-1 p-4 space-y-5">
+        <h1 className="text-lg font-bold">{STEPS[Number(step) - 1].label}</h1>
+        {STEPS[Number(step) - 1].component}
       </div>
+
+      {/* Step Navigation */}
       <div className="p-4 pt-0">
-        <div className="flex gap-2 justify-end pt-4 border-t border-input">
-          <Button>Previous</Button>
-          <Button>Next</Button>
-        </div>
+        {Number(step) !== STEPS.length && (
+          <div className="flex gap-2 justify-end pt-4 border-t border-input">
+            {Number(step) !== 1 && (
+              <Button onClick={handlePrevious}>Previous</Button>
+            )}
+            <Button onClick={handleNext}>Next</Button>
+          </div>
+        )}
+
+        {Number(step) === STEPS.length && (
+          <div className="flex gap-2 justify-end pt-4 border-t border-input">
+            {Number(step) !== 1 && (
+              <Button onClick={handlePrevious}>Previous</Button>
+            )}
+            <Button onClick={handleSave}>Save and Publish</Button>
+          </div>
+        )}
       </div>
     </div>
   );
 }
+
+const STEPS: StepTypes[] = [
+  {
+    step: 1,
+    key: "profile-info",
+    label: "Profile Info",
+    component: <ProfileInfo />,
+  },
+  {
+    step: 2,
+    key: "work-experience",
+    label: "Work Experience (Optional)",
+    component: <WorkExperienceStep />,
+  },
+  {
+    step: 3,
+    key: "skills",
+    label: "Skills",
+    component: <SkillsStep />,
+  },
+  {
+    step: 4,
+    key: "projects",
+    label: "Projects",
+    component: <ProjectsStep />,
+  },
+  {
+    step: 5,
+    key: "certifications",
+    label: "Certifications (Optional)",
+    component: <CertificationStep />,
+  },
+  {
+    step: 6,
+    key: "educations",
+    label: "Educations",
+    component: <EducationStep />,
+  },
+];
+
+type StepTypes = {
+  step: number;
+  key: string;
+  label: string;
+  component: React.ReactNode;
+};
