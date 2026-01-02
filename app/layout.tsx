@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Nunito_Sans } from "next/font/google";
 import "./globals.css";
+import AppHeader from "@/components/AppHeader";
+import { ThemeProvider } from "@/components/theme-provider";
+
+const nunitoSans = Nunito_Sans({ variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +27,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={nunitoSans.variable} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased w-full flex flex-col h-screen `}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AppHeader />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
