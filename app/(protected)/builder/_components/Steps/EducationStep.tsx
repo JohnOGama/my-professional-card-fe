@@ -8,7 +8,7 @@ export default function EducationStep() {
   return (
     <StepWrapper>
       <Field>
-        <FieldLabel>Degree</FieldLabel>
+        <FieldLabel>Field Of Study</FieldLabel>
         <FieldContent>
           <Input type="text" placeholder="Enter your degree" />
         </FieldContent>

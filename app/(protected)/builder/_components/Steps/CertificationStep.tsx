@@ -14,6 +14,18 @@ export default function CertificationStep() {
         </FieldContent>
       </Field>
       <Field>
+        <FieldLabel>Credential Id</FieldLabel>
+        <FieldContent>
+          <Input type="text" placeholder="Enter your certification issuer" />
+        </FieldContent>
+      </Field>
+      <Field>
+        <FieldLabel>Credential Url</FieldLabel>
+        <FieldContent>
+          <Input type="text" placeholder="Enter your certification issuer" />
+        </FieldContent>
+      </Field>
+      <Field>
         <FieldLabel>Certification Issuer</FieldLabel>
         <FieldContent>
           <Input type="text" placeholder="Enter your certification issuer" />

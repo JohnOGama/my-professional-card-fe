@@ -32,7 +32,7 @@ export default function BuilderEditor() {
   };
 
   return (
-    <div className="w-full hidden md:flex lg:w-[500px] border-r border-input  flex-col ">
+    <div className="w-full hidden md:flex lg:w-125 border-r border-input  flex-col ">
       <div className="p-4 pb-0">
         <div>
           <h1 className="text-2xl font-bold">Builder Editor</h1>

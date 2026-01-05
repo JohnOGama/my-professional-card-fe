@@ -22,12 +22,12 @@ export default function ProjectsStep() {
           />
         </FieldContent>
       </Field>
-      <Field>
+      {/* <Field>
         <FieldLabel>Project Image</FieldLabel>
         <FieldContent>
           <Input type="file" placeholder="Enter your project image" />
         </FieldContent>
-      </Field>
+      </Field> */}
       <Field>
         <FieldLabel>Project Link</FieldLabel>
         <FieldContent>
