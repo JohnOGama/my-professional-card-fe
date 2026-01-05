@@ -1,6 +1,6 @@
 const WorkExperience = () => {
   return (
-    <div className=" flex flex-col gap-4 h-full overflow-y-auto">
+    <div className=" flex flex-col gap-4 ">
       {WORK_EXPERIENCE.map((item, index) => (
         <WorkExperienceCard key={index} item={item} />
       ))}

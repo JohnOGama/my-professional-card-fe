@@ -19,8 +19,8 @@ export default function BuilderPreview() {
 
   return (
     <div className="w-full h-full flex justify-center items-center md:py-5">
-      <Card className="w-[800px] h-full p-0 gap-0 relative rounded-none md:rounded-xl">
-        <div className="relative w-full bg-input h-[200px]">
+      <Card className="w-200 h-full p-0 gap-0 relative rounded-none md:rounded-xl">
+        <div className="relative w-full bg-input h-50">
           <Image
             src="/dummy/cover-image.avif"
             alt="Background"
@@ -64,7 +64,7 @@ export default function BuilderPreview() {
               and AWS services, building scalable and production-ready systems.
             </p>
 
-            <div className="flex gap-2 items-center overflow-x-auto">
+            <div className="flex gap-2 items-center overflow-x-auto scrollbar-hide">
               {TABS.map((item) => (
                 <div key={item.name} onClick={() => setActiveTab(item.key)}>
                   <Button
