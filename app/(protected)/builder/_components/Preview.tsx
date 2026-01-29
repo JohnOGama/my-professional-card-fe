@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormContext } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
@@ -13,13 +14,17 @@ import Education from "./Tabs/Education";
 import { CloudDownload, Forward, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import AppAvatar from "@/components/AppAvatar";
+import { CreateSchemaT } from "./schema/create.schema";
 
 export default function BuilderPreview() {
   const [activeTab, setActiveTab] = useState<TabKey>(DEFAULT_TAB);
+  const { watch } = useFormContext<CreateSchemaT>();
+
+  const formValues = watch();
 
   return (
-    <div className="w-full h-full flex justify-center items-center md:py-5">
-      <Card className="w-200 h-full p-0 gap-0 relative rounded-none md:rounded-xl">
+    <div className="w-full h-full flex justify-center lg:pt-5  ">
+      <Card className="w-200 h-[90%] p-0 gap-0 relative rounded-none md:rounded-xl">
         <div className="relative w-full bg-input h-50">
           <Image
             src="/dummy/cover-image.avif"
@@ -48,20 +53,36 @@ export default function BuilderPreview() {
         </div>
         <div className="p-5 absolute top-30 bottom-0 left-0 right-0 z-20 flex flex-col gap-5">
           <div className="space-y-2 shrink-0">
-            <AppAvatar src="" alt="Profile" fallback="JO" />
+            <AppAvatar
+              src=""
+              alt={formValues.profileSchema?.firstName || "Profile"}
+              fallback={
+                formValues.profileSchema?.firstName?.[0]?.toUpperCase() ||
+                formValues.profileSchema?.lastName?.[0]?.toUpperCase() ||
+                "JO"
+              }
+            />
             <div className="mt-4">
-              <h1 className="text-4xl font-semibold">John Doe</h1>
-              <p className="text-lg font-semibold">Software Engineer</p>
+              <h1 className="text-4xl font-semibold">
+                {formValues.profileSchema?.firstName && formValues.profileSchema?.lastName
+                  ? `${formValues.profileSchema.firstName} ${formValues.profileSchema.lastName}`
+                  : "John Doe"}
+              </h1>
+              <p className="text-lg font-semibold">
+                {formValues.profileSchema?.jobTitle || "Software Engineer"}
+              </p>
             </div>
             <div className="flex gap-1  items-center text-sm text-muted-foreground">
               <MapPin size={15} />
-              <p>New York, NY</p>
+              <p>
+                {formValues.profileSchema?.city && formValues.profileSchema?.country
+                  ? `${formValues.profileSchema.city}, ${formValues.profileSchema.country}`
+                  : "New York, NY"}
+              </p>
             </div>
             <p className="text-sm text-muted-foreground line-clamp-3 ">
-              I&apos;m a software engineer with a strong focus on backend
-              systems, cloud architecture, and secure application design. I
-              primarily work with NestJS, modern JavaScript/TypeScript stacks,
-              and AWS services, building scalable and production-ready systems.
+              {formValues.profileSchema?.aboutMe ||
+                "I'm a software engineer with a strong focus on backend systems, cloud architecture, and secure application design. I primarily work with NestJS, modern JavaScript/TypeScript stacks, and AWS services, building scalable and production-ready systems."}
             </p>
 
             <div className="flex gap-2 items-center overflow-x-auto scrollbar-hide">
