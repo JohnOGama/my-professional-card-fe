@@ -4,6 +4,7 @@ import "./globals.css";
 import AppHeader from "@/components/AppHeader";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Toaster } from "@/components/ui/sonner";
 
 const nunitoSans = Nunito_Sans({ variable: "--font-sans" });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang="en" className={nunitoSans.variable} suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-full flex flex-col h-screen `}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"
@@ -40,6 +42,7 @@ export default function RootLayout({
         >
           <AppHeader />
           <NuqsAdapter>{children}</NuqsAdapter>
+          <Toaster position="bottom-left"/>
         </ThemeProvider>
       </body>
     </html>

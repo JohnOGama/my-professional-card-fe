@@ -3,7 +3,7 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/libs/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -118,7 +118,7 @@ function InputGroupInput({
   return (
     <Input
       data-slot="input-group-control"
-      className={cn("rounded-none border-0 bg-transparent shadow-none ring-0 focus-visible:ring-0 aria-invalid:ring-0 dark:bg-transparent flex-1", className)}
+      className={cn("rounded-none border-0 bg-transparent shadow-none ring-0 focus-visible:ring-0 text-sm aria-invalid:ring-0 dark:bg-transparent flex-1", className)}
       {...props}
     />
   )
