@@ -1,5 +1,7 @@
 "use client";
 
+import { useForm, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import ProfileInfo from "./Steps/ProfileInfo";
@@ -9,13 +11,29 @@ import SkillsStep from "./Steps/SkillsStep";
 import ProjectsStep from "./Steps/ProjectsStep";
 import CertificationStep from "./Steps/CertificationStep";
 import EducationStep from "./Steps/EducationStep";
+import { create, CreateSchemaT } from "./schema/create.schema";
 
 export default function BuilderEditor() {
   const [step, setStep] = useQueryState("step", {
     defaultValue: "1",
   });
 
+  const methods = useForm<CreateSchemaT>({
+    resolver: zodResolver(create),
+    mode: "onChange",
+    defaultValues: {
+      workExperiences: [],
+      skills: [],
+      projects: [],
+      certifications: [],
+      educations: [],
+    },
+  });
+
+  const {handleSubmit, getValues, formState: {errors}} = methods
+
   const handleNext = () => {
+    console.log("profile", getValues("profileSchema"))
     const nextStep = Number(step) + 1;
     if (nextStep > STEPS.length) return;
     setStep(nextStep.toString());
@@ -27,27 +45,28 @@ export default function BuilderEditor() {
     setStep(prevStep.toString());
   };
 
-  const handleSave = () => {
-    console.log("Save and Publish");
-  };
+  const handleSave = handleSubmit((data) => {
+    console.log("Save and Publish", data);
+  });
 
   return (
-    <div className="w-full hidden md:flex lg:w-125 border-r border-input  flex-col ">
-      <div className="p-4 pb-0">
-        <div>
-          <h1 className="text-2xl font-bold">Builder Editor</h1>
-          <p className="text-sm text-muted-foreground">
-            Build your professional card with ease.
-          </p>
+    <FormProvider {...methods}>
+      <div className="w-full hidden md:flex lg:w-125 border-r border-input  flex-col ">
+        <div className="p-4 pb-0">
+          <div>
+            <h1 className="text-2xl font-bold">Builder Editor</h1>
+            <p className="text-sm text-muted-foreground">
+              Build your professional card with ease.
+            </p>
+          </div>
+          <Separator className="mt-5" />
         </div>
-        <Separator className="mt-5" />
-      </div>
 
-      {/* Rendered Step */}
-      <div className="flex-1 p-4 space-y-5">
-        <h1 className="text-lg font-bold">{STEPS[Number(step) - 1].label}</h1>
-        {STEPS[Number(step) - 1].component}
-      </div>
+        {/* Rendered Step */}
+        <div className="flex-1 p-4 space-y-5">
+          <h1 className="text-lg font-bold">{STEPS[Number(step) - 1].label}</h1>
+          {STEPS[Number(step) - 1].component}
+        </div>
 
       {/* Step Navigation */}
       <div className="p-4 pt-0">
@@ -69,7 +88,8 @@ export default function BuilderEditor() {
           </div>
         )}
       </div>
-    </div>
+      </div>
+    </FormProvider>
   );
 }
 
