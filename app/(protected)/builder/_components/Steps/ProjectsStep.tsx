@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useFormContext, useFieldArray } from "react-hook-form";
 import { Field, FieldContent, FieldLabel, FieldError } from "@/components/ui/field";
 import StepWrapper from "./StepWrapper";
@@ -9,7 +9,11 @@ import { CreateSchemaT } from "../schema/create.schema";
 import { X } from "lucide-react";
 
 export default function ProjectsStep() {
-  const { register, control, formState: { errors } } = useFormContext<CreateSchemaT>();
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useFormContext<CreateSchemaT>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "projects",
@@ -50,9 +54,7 @@ export default function ProjectsStep() {
                   {...register(`projects.${index}.title`)}
                 />
               </FieldContent>
-              {errors.projects?.[index]?.title && (
-                <FieldError>{errors.projects[index]?.title?.message}</FieldError>
-              )}
+              {errors.projects?.[index]?.title && <FieldError>{errors.projects[index]?.title?.message}</FieldError>}
             </Field>
             <Field>
               <FieldLabel htmlFor={`projects.${index}.description`}>Description</FieldLabel>
@@ -81,9 +83,7 @@ export default function ProjectsStep() {
                   {...register(`projects.${index}.link`)}
                 />
               </FieldContent>
-              {errors.projects?.[index]?.link && (
-                <FieldError>{errors.projects[index]?.link?.message}</FieldError>
-              )}
+              {errors.projects?.[index]?.link && <FieldError>{errors.projects[index]?.link?.message}</FieldError>}
             </Field>
             <Field>
               <FieldLabel htmlFor={`projects.${index}.startDate`}>Start Date (optional)</FieldLabel>

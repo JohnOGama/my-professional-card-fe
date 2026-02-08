@@ -1,12 +1,6 @@
 export const DEFAULT_TAB = "work-experience";
 
-export type TabKey =
-  | "work-experience"
-  | "skills"
-  | "projects"
-  | "testimonials"
-  | "certifications"
-  | "educations";
+export type TabKey = "work-experience" | "skills" | "projects" | "testimonials" | "certifications" | "educations";
 
 export type Tab = {
   name: string;

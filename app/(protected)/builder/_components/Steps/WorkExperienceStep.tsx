@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useFormContext, useFieldArray } from "react-hook-form";
 import { Field, FieldContent, FieldLabel, FieldError } from "@/components/ui/field";
 import StepWrapper from "./StepWrapper";
@@ -9,7 +9,11 @@ import { CreateSchemaT } from "../schema/create.schema";
 import { X } from "lucide-react";
 
 export default function WorkExperienceStep() {
-  const { register, control, formState: { errors } } = useFormContext<CreateSchemaT>();
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useFormContext<CreateSchemaT>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "workExperiences",

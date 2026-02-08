@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useForm } from "react-hook-form";
 import { signupSchema, SignupSchemaT } from "./_schema/signupSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,34 +13,38 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 const SignupPage = () => {
-  const router = useRouter()
-  const [showPassword, setShowPassword] = useState<boolean>(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false)
-  const {handleSubmit, register, formState: {errors, isSubmitting, isValid}} = useForm<SignupSchemaT>({
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm<SignupSchemaT>({
     resolver: zodResolver(signupSchema),
-    mode: "onChange"
-  })
+    mode: "onChange",
+  });
 
   const onSubmit = async (data: SignupSchemaT) => {
-    if(isValid) {
+    if (isValid) {
       const response = await authClient.signUp.email({
         password: data.password,
         email: data.email,
         name: data.name,
-      })
+      });
 
-      const user = response?.data?.user
+      const user = response?.data?.user;
 
-      if(user && Object.keys(user).length !== 0) {
-        toast.success("Account created successfully")
-        router.push("/login")
+      if (user && Object.keys(user).length !== 0) {
+        toast.success("Account created successfully");
+        router.push("/login");
       }
 
-      if(response.error) {
-        toast.error(response.error.message)
+      if (response.error) {
+        toast.error(response.error.message);
       }
     }
-  }
+  };
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-8">
@@ -70,9 +74,7 @@ const SignupPage = () => {
                     {...register("name")}
                   />
                 </InputGroup>
-                {errors?.name && (
-                  <FieldError>{errors.name.message}</FieldError>
-                )}
+                {errors?.name && <FieldError>{errors.name.message}</FieldError>}
               </FieldGroup>
 
               {/* Email Field */}
@@ -90,9 +92,7 @@ const SignupPage = () => {
                     {...register("email")}
                   />
                 </InputGroup>
-                {errors?.email && (
-                  <FieldError>{errors.email.message}</FieldError>
-                )}
+                {errors?.email && <FieldError>{errors.email.message}</FieldError>}
               </FieldGroup>
 
               {/* Password Field */}
@@ -113,16 +113,14 @@ const SignupPage = () => {
                     <InputGroupButton
                       type="button"
                       variant="ghost"
-                      onClick={() => setShowPassword(prev => !prev)}
+                      onClick={() => setShowPassword((prev) => !prev)}
                       aria-label={showPassword ? "Hide password" : "Show password"}
                     >
                       {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                     </InputGroupButton>
                   </InputGroupAddon>
                 </InputGroup>
-                {errors?.password && (
-                  <FieldError>{errors.password.message}</FieldError>
-                )}
+                {errors?.password && <FieldError>{errors.password.message}</FieldError>}
               </FieldGroup>
 
               {/* Confirm Password Field */}
@@ -143,25 +141,19 @@ const SignupPage = () => {
                     <InputGroupButton
                       type="button"
                       variant="ghost"
-                      onClick={() => setShowConfirmPassword(prev => !prev)}
+                      onClick={() => setShowConfirmPassword((prev) => !prev)}
                       aria-label={showConfirmPassword ? "Hide password" : "Show password"}
                     >
                       {showConfirmPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                     </InputGroupButton>
                   </InputGroupAddon>
                 </InputGroup>
-                {errors?.confirmPassword && (
-                  <FieldError>{errors.confirmPassword.message}</FieldError>
-                )}
+                {errors?.confirmPassword && <FieldError>{errors.confirmPassword.message}</FieldError>}
               </FieldGroup>
 
               {/* Submit Button */}
               <div className="pt-2">
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
                   {isSubmitting ? "Creating account..." : "Sign up"}
                 </Button>
               </div>
@@ -172,10 +164,7 @@ const SignupPage = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
               Already have an account?{" "}
-              <Link
-                href="/login"
-                className="text-primary hover:underline font-medium"
-              >
+              <Link href="/login" className="text-primary hover:underline font-medium">
                 Sign in
               </Link>
             </p>
@@ -183,7 +172,7 @@ const SignupPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignupPage
+export default SignupPage;

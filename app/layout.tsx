@@ -34,15 +34,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-full flex flex-col h-screen `}
         suppressHydrationWarning
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AppHeader />
           <NuqsAdapter>{children}</NuqsAdapter>
-          <Toaster position="bottom-left"/>
+          <Toaster position="bottom-left" />
         </ThemeProvider>
       </body>
     </html>

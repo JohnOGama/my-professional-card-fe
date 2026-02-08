@@ -1,9 +1,6 @@
 import { GetSessionDataT } from "@/types/session";
 
-
-export const parseSessionData = (
-  sessionDataValue?: string
-): GetSessionDataT | null => {
+export const parseSessionData = (sessionDataValue?: string): GetSessionDataT | null => {
   if (!sessionDataValue) return null;
 
   try {

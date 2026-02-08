@@ -10,11 +10,7 @@ export default function Certifications() {
   );
 }
 
-const CertificationCard = ({
-  certification,
-}: {
-  certification: (typeof CERTIFICATIONS)[0];
-}) => {
+const CertificationCard = ({ certification }: { certification: (typeof CERTIFICATIONS)[0] }) => {
   return (
     <div key={certification.name} className="flex gap-1 items-start w-full">
       <div className="flex flex-col items-center justify-center h-full pt-3 w-5 shrink-0 ">
@@ -28,9 +24,7 @@ const CertificationCard = ({
         </div>
         <p className="text-sm font-semibold ">{certification.issuer}</p>
         <p>{certification.year}</p>
-        <p className="text-sm text-muted-foreground line-clamp-3">
-          {certification.description}
-        </p>
+        <p className="text-sm text-muted-foreground line-clamp-3">{certification.description}</p>
       </div>
     </div>
   );

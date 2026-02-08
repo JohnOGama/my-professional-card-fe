@@ -14,11 +14,7 @@ const Testimonials = () => {
 
 export default Testimonials;
 
-function TestimonialCard({
-  testimonial,
-}: {
-  testimonial: (typeof TESTIMONIALS)[0];
-}) {
+function TestimonialCard({ testimonial }: { testimonial: (typeof TESTIMONIALS)[0] }) {
   return (
     <Card className="flex items-start p-3 gap-3">
       <p className="text-sm line-clamp-4">{testimonial.description}</p>

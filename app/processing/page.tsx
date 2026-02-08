@@ -1,14 +1,14 @@
-import { Spinner } from "@/components/ui/spinner"
-import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
-import { COOKIES_KEY } from "@/common/constant"
+import { COOKIES_KEY } from "@/common/constant";
+import { Spinner } from "@/components/ui/spinner";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const ProcessingPage = async () => {
-  const cookieStore = await cookies()
-  const sessionCookie = cookieStore.get(COOKIES_KEY)
-  
+  const cookieStore = await cookies();
+  const sessionCookie = cookieStore.get(COOKIES_KEY);
+
   if (sessionCookie?.value) {
-    redirect("/")
+    redirect("/");
   }
 
   return (
@@ -18,7 +18,7 @@ const ProcessingPage = async () => {
         <Spinner />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProcessingPage
+export default ProcessingPage;

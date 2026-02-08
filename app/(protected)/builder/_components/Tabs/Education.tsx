@@ -8,11 +8,7 @@ export default function Education() {
   );
 }
 
-const EducationCard = ({
-  education,
-}: {
-  education: (typeof EDUCATIONS)[0];
-}) => {
+const EducationCard = ({ education }: { education: (typeof EDUCATIONS)[0] }) => {
   return (
     <div key={education.year} className="flex gap-1 items-start w-full">
       <div className="flex flex-col items-center justify-center h-full pt-3 w-5 shrink-0 ">
@@ -23,9 +19,7 @@ const EducationCard = ({
         <h1 className="text-lg font-bold">{education.degree}</h1>
         <p className="text-sm font-semibold ">{education.school}</p>
         <p>{education.year}</p>
-        <p className="text-sm text-muted-foreground line-clamp-3">
-          {education.description}
-        </p>
+        <p className="text-sm text-muted-foreground line-clamp-3">{education.description}</p>
       </div>
     </div>
   );

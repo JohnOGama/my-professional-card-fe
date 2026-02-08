@@ -2,42 +2,32 @@ import { useFormContext } from "react-hook-form";
 import { CreateSchemaT } from "../schema/create.schema";
 
 const WorkExperience = () => {
-  const {watch} = useFormContext<CreateSchemaT>()
-  const workExperiences = watch().workExperiences
+  const { watch } = useFormContext<CreateSchemaT>();
+  const workExperiences = watch().workExperiences;
 
-  console.log('workExperiences',workExperiences)
+  console.log("workExperiences", workExperiences);
 
   return (
     <div className=" flex flex-col gap-4 ">
       {workExperiences.length === 0 &&
-        WORK_EXPERIENCE.map((item, index) => (
-          <WorkExperienceCard key={index} item={item} />
-        ))
-      }
+        WORK_EXPERIENCE.map((item, index) => <WorkExperienceCard key={index} item={item} />)}
 
-      {workExperiences.length !== 0  &&
-        workExperiences.map((item, index) => (
-          <WorkExperienceCard key={index} item={item} />
-        ))
-      }
+      {workExperiences.length !== 0 &&
+        workExperiences.map((item, index) => <WorkExperienceCard key={index} item={item} />)}
     </div>
   );
 };
 
 export default WorkExperience;
 
-const WorkExperienceCard = ({
-  item,
-}: {
-  item: WorkExperienceT;
-}) => {
-  const startMonth = getDateYear(item.startDate)?.month
-  const startYear = getDateYear(item.startDate)?.year
+const WorkExperienceCard = ({ item }: { item: WorkExperienceT }) => {
+  const startMonth = getDateYear(item.startDate)?.month;
+  const startYear = getDateYear(item.startDate)?.year;
 
-  const endMonth = getDateYear(item.endDate)?.month
-  const endYear = getDateYear(item.endDate)?.year
+  const endMonth = getDateYear(item.endDate)?.month;
+  const endYear = getDateYear(item.endDate)?.year;
 
-  const isDateEmpty = item.startDate !== ""
+  const isDateEmpty = item.startDate !== "";
 
   return (
     <div key={item.jobTitle} className="flex gap-1 items-start ">
@@ -48,34 +38,35 @@ const WorkExperienceCard = ({
       <div>
         <h1 className="text-lg font-bold">{item.jobTitle}</h1>
         <p className="text-sm font-semibold ">{item.companyName}</p>
-        {isDateEmpty &&
+        {isDateEmpty && (
           <div className="flex gap-2 items-center">
-            <span>{startMonth}/{startYear}</span> - <span>{item.endDate !== "" ? `${endMonth}/${endYear}` : "Present"}</span>
+            <span>
+              {startMonth}/{startYear}
+            </span>{" "}
+            - <span>{item.endDate !== "" ? `${endMonth}/${endYear}` : "Present"}</span>
           </div>
-        }
+        )}
 
-        <p className="text-sm text-muted-foreground line-clamp-3">
-          {item.description}
-        </p>
+        <p className="text-sm text-muted-foreground line-clamp-3">{item.description}</p>
       </div>
     </div>
   );
 };
 
 const getDateYear = (date: string | undefined) => {
-  if(!date) return;
+  if (!date) return;
 
-  let year = ""
-  let month = ""
+  let year = "";
+  let month = "";
 
-  year = date.split("-")[0]
-  month = date.split("-")[1]
+  year = date.split("-")[0];
+  month = date.split("-")[1];
 
   return {
     year,
-    month
-  }
-}
+    month,
+  };
+};
 
 export const WORK_EXPERIENCE: WorkExperienceT[] = [
   {
@@ -113,9 +104,9 @@ export const WORK_EXPERIENCE: WorkExperienceT[] = [
 ];
 
 type WorkExperienceT = {
-    jobTitle: string;
-    companyName: string;
-    startDate: string;
-    endDate?: string;
-    description: string;
-}
+  jobTitle: string;
+  companyName: string;
+  startDate: string;
+  endDate?: string;
+  description: string;
+};

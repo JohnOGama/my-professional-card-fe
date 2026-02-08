@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useFormContext, useFieldArray } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import StepWrapper from "./StepWrapper";
@@ -9,7 +9,11 @@ import { CreateSchemaT } from "../schema/create.schema";
 import { X } from "lucide-react";
 
 export default function CertificationStep() {
-  const { register, control, formState: { errors } } = useFormContext<CreateSchemaT>();
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useFormContext<CreateSchemaT>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "certifications",

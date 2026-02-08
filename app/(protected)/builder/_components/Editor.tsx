@@ -20,7 +20,7 @@ export default function BuilderEditor() {
   const { handleSubmit, getValues } = useFormContext<CreateSchemaT>();
 
   const handleNext = () => {
-    console.log("profile", getValues("profileSchema"))
+    console.log("profile", getValues("profileSchema"));
     const nextStep = Number(step) + 1;
     if (nextStep > STEPS.length) return;
     setStep(nextStep.toString());
@@ -38,38 +38,32 @@ export default function BuilderEditor() {
 
   return (
     <div className="w-full bg-background hidden md:flex lg:w-125 border-r border-input flex-col h-full overflow-hidden ">
-        <div className="p-4 pb-0 shrink-0">
-          <div>
-            <h1 className="text-2xl font-bold">Builder Editor</h1>
-            <p className="text-sm text-muted-foreground">
-              Build your professional card with ease.
-            </p>
-          </div>
-          <Separator className="mt-5" />
+      <div className="p-4 pb-0 shrink-0">
+        <div>
+          <h1 className="text-2xl font-bold">Builder Editor</h1>
+          <p className="text-sm text-muted-foreground">Build your professional card with ease.</p>
         </div>
+        <Separator className="mt-5" />
+      </div>
 
-        {/* Rendered Step - Scrollable */}
-        <div className="flex-1 p-4 space-y-5 overflow-y-auto min-h-0 max-h-[75%]">
-          <h1 className="text-lg font-bold">{STEPS[Number(step) - 1].label}</h1>
-          {STEPS[Number(step) - 1].component}
-        </div>
+      {/* Rendered Step - Scrollable */}
+      <div className="flex-1 p-4 space-y-5 overflow-y-auto min-h-0 max-h-[75%]">
+        <h1 className="text-lg font-bold">{STEPS[Number(step) - 1].label}</h1>
+        {STEPS[Number(step) - 1].component}
+      </div>
 
       {/* Step Navigation */}
       <div className="p-4 pt-0 shrink-0 border-t border-input">
         {Number(step) !== STEPS.length && (
           <div className="flex gap-2 justify-end pt-4">
-            {Number(step) !== 1 && (
-              <Button onClick={handlePrevious}>Previous</Button>
-            )}
+            {Number(step) !== 1 && <Button onClick={handlePrevious}>Previous</Button>}
             <Button onClick={handleNext}>Next</Button>
           </div>
         )}
 
         {Number(step) === STEPS.length && (
           <div className="flex gap-2 justify-end pt-4">
-            {Number(step) !== 1 && (
-              <Button onClick={handlePrevious}>Previous</Button>
-            )}
+            {Number(step) !== 1 && <Button onClick={handlePrevious}>Previous</Button>}
             <Button onClick={handleSave}>Save and Publish</Button>
           </div>
         )}

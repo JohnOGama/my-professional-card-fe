@@ -19,18 +19,11 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
   return (
     <Card className="flex items-start p-0 gap-0 group">
       <div className="relative w-full h-32 group-hover:scale-105 transition-all duration-300">
-        <Image
-          className="object-cover"
-          src={project.image}
-          alt={project.title}
-          fill
-        />
+        <Image className="object-cover" src={project.image} alt={project.title} fill />
       </div>
       <div className="p-3 space-y-2">
         <h1 className="text-sm font-bold">{project.title}</h1>
-        <p className="text-xs text-muted-foreground line-clamp-3">
-          {project.description}
-        </p>
+        <p className="text-xs text-muted-foreground line-clamp-3">{project.description}</p>
         <Button variant="outline" className="w-full" size="sm">
           <Link />
           View Project

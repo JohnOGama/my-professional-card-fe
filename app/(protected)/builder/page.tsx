@@ -27,7 +27,7 @@ export default function BuilderPage() {
           className="absolute inset-0 opacity-30 dark:opacity-20 pointer-events-none"
           style={{
             backgroundImage: `radial-gradient(circle, currentColor 1px, transparent 1px)`,
-            backgroundSize: '24px 24px',
+            backgroundSize: "24px 24px",
           }}
         />
 

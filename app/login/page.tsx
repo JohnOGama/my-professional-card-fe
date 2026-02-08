@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useForm } from "react-hook-form";
 import { userSchema, UserSchemaT } from "./_schema/userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,32 +13,35 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
-  const router = useRouter()
-  const [showPassword, setShowPassword] = useState<boolean>(false)
-  const {handleSubmit, register, formState: {errors, isSubmitting}} = useForm<UserSchemaT>({
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm<UserSchemaT>({
     resolver: zodResolver(userSchema),
-    mode: "onChange"
-  })
+    mode: "onChange",
+  });
 
   const onSubmit = async (data: UserSchemaT) => {
-    console.log('data', data)
+    console.log("data", data);
     const response = await authClient.signIn.email({
       email: data.email,
-      password: data.password
-    })
+      password: data.password,
+    });
 
-    const user = response?.data?.user
+    const user = response?.data?.user;
 
-    if(user && Object.keys(user).length !== 0) {
-      toast.success("Account created successfully")
-      router.push("/card")
+    if (user && Object.keys(user).length !== 0) {
+      toast.success("Account created successfully");
+      router.push("/card");
     }
 
-    if(response.error) {
-      toast.error(response.error.message)
+    if (response.error) {
+      toast.error(response.error.message);
     }
-
-  }
+  };
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-8">
@@ -68,9 +71,7 @@ const LoginPage = () => {
                     {...register("email")}
                   />
                 </InputGroup>
-                {errors?.email && (
-                  <FieldError>{errors.email.message}</FieldError>
-                )}
+                {errors?.email && <FieldError>{errors.email.message}</FieldError>}
               </FieldGroup>
 
               {/* Password Field */}
@@ -91,25 +92,19 @@ const LoginPage = () => {
                     <InputGroupButton
                       type="button"
                       variant="ghost"
-                      onClick={() => setShowPassword(prev => !prev)}
+                      onClick={() => setShowPassword((prev) => !prev)}
                       aria-label={showPassword ? "Hide password" : "Show password"}
                     >
                       {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                     </InputGroupButton>
                   </InputGroupAddon>
                 </InputGroup>
-                {errors?.password && (
-                  <FieldError>{errors.password.message}</FieldError>
-                )}
+                {errors?.password && <FieldError>{errors.password.message}</FieldError>}
               </FieldGroup>
 
               {/* Submit Button */}
               <div className="pt-2">
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
                   {isSubmitting ? "Signing in..." : "Sign in"}
                 </Button>
               </div>
@@ -120,24 +115,18 @@ const LoginPage = () => {
           <div className="mt-6 text-center space-y-2">
             <p className="text-sm text-muted-foreground">
               Don&apos;t have an account?{" "}
-              <Link
-                href="/signup"
-                className="text-primary hover:underline font-medium"
-              >
+              <Link href="/signup" className="text-primary hover:underline font-medium">
                 Sign up
               </Link>
             </p>
-            <Link
-              href="/forgot-password"
-              className="text-sm text-primary hover:underline block"
-            >
+            <Link href="/forgot-password" className="text-sm text-primary hover:underline block">
               Forgot your password?
             </Link>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

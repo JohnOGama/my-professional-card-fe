@@ -26,12 +26,7 @@ export default function BuilderPreview() {
     <div className="w-full h-full flex justify-center lg:pt-5  ">
       <Card className="w-200 h-[90%] p-0 gap-0 relative rounded-none md:rounded-xl">
         <div className="relative w-full bg-input h-50">
-          <Image
-            src="/dummy/cover-image.avif"
-            alt="Background"
-            fill
-            className="object-cover"
-          />
+          <Image src="/dummy/cover-image.avif" alt="Background" fill className="object-cover" />
         </div>
         <div className="w-full flex justify-end gap-2 items-center p-5">
           <Button variant="outline">
@@ -68,9 +63,7 @@ export default function BuilderPreview() {
                   ? `${formValues.profileSchema.firstName} ${formValues.profileSchema.lastName}`
                   : "John Doe"}
               </h1>
-              <p className="text-lg font-semibold">
-                {formValues.profileSchema?.jobTitle || "Software Engineer"}
-              </p>
+              <p className="text-lg font-semibold">{formValues.profileSchema?.jobTitle || "Software Engineer"}</p>
             </div>
             <div className="flex gap-1  items-center text-sm text-muted-foreground">
               <MapPin size={15} />
@@ -88,11 +81,7 @@ export default function BuilderPreview() {
             <div className="flex gap-2 items-center overflow-x-auto scrollbar-hide">
               {TABS.map((item) => (
                 <div key={item.name} onClick={() => setActiveTab(item.key)}>
-                  <Button
-                    variant={activeTab === item.key ? "default" : "outline"}
-                  >
-                    {item.name}
-                  </Button>
+                  <Button variant={activeTab === item.key ? "default" : "outline"}>{item.name}</Button>
                 </div>
               ))}
             </div>

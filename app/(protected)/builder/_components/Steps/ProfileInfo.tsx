@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useFormContext, Controller } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import { Field, FieldContent, FieldLabel, FieldError } from "@/components/ui/field";
@@ -16,7 +16,11 @@ import StepWrapper from "./StepWrapper";
 import { CreateSchemaT } from "../schema/create.schema";
 
 export default function ProfileInfo() {
-  const { register, control, formState: { errors } } = useFormContext<CreateSchemaT>();
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useFormContext<CreateSchemaT>();
 
   return (
     <StepWrapper>
@@ -32,9 +36,7 @@ export default function ProfileInfo() {
               {...register("profileSchema.firstName")}
             />
           </FieldContent>
-          {errors.profileSchema?.firstName && (
-            <FieldError>{errors.profileSchema.firstName.message}</FieldError>
-          )}
+          {errors.profileSchema?.firstName && <FieldError>{errors.profileSchema.firstName.message}</FieldError>}
         </Field>
         <Field>
           <FieldLabel htmlFor="lastName">Last Name</FieldLabel>
@@ -47,9 +49,7 @@ export default function ProfileInfo() {
               {...register("profileSchema.lastName")}
             />
           </FieldContent>
-          {errors.profileSchema?.lastName && (
-            <FieldError>{errors.profileSchema.lastName.message}</FieldError>
-          )}
+          {errors.profileSchema?.lastName && <FieldError>{errors.profileSchema.lastName.message}</FieldError>}
         </Field>
       </div>
       <Field>
@@ -63,9 +63,7 @@ export default function ProfileInfo() {
             {...register("profileSchema.jobTitle")}
           />
         </FieldContent>
-        {errors.profileSchema?.jobTitle && (
-          <FieldError>{errors.profileSchema.jobTitle.message}</FieldError>
-        )}
+        {errors.profileSchema?.jobTitle && <FieldError>{errors.profileSchema.jobTitle.message}</FieldError>}
       </Field>
       <div className="flex gap-2">
         <Field>
@@ -79,9 +77,7 @@ export default function ProfileInfo() {
               {...register("profileSchema.contactNumber")}
             />
           </FieldContent>
-          {errors.profileSchema?.contactNumber && (
-            <FieldError>{errors.profileSchema.contactNumber.message}</FieldError>
-          )}
+          {errors.profileSchema?.contactNumber && <FieldError>{errors.profileSchema.contactNumber.message}</FieldError>}
         </Field>
         <Field>
           <FieldLabel htmlFor="gender">Gender</FieldLabel>
@@ -102,9 +98,7 @@ export default function ProfileInfo() {
               )}
             />
           </FieldContent>
-          {errors.profileSchema?.gender && (
-            <FieldError>{errors.profileSchema.gender.message}</FieldError>
-          )}
+          {errors.profileSchema?.gender && <FieldError>{errors.profileSchema.gender.message}</FieldError>}
         </Field>
       </div>
       <div className="flex gap-2">
@@ -119,9 +113,7 @@ export default function ProfileInfo() {
               {...register("profileSchema.city")}
             />
           </FieldContent>
-          {errors.profileSchema?.city && (
-            <FieldError>{errors.profileSchema.city.message}</FieldError>
-          )}
+          {errors.profileSchema?.city && <FieldError>{errors.profileSchema.city.message}</FieldError>}
         </Field>
         <Field>
           <FieldLabel htmlFor="country">Country</FieldLabel>
@@ -145,9 +137,7 @@ export default function ProfileInfo() {
               )}
             />
           </FieldContent>
-          {errors.profileSchema?.country && (
-            <FieldError>{errors.profileSchema.country.message}</FieldError>
-          )}
+          {errors.profileSchema?.country && <FieldError>{errors.profileSchema.country.message}</FieldError>}
         </Field>
       </div>
       <Field>
@@ -163,9 +153,7 @@ export default function ProfileInfo() {
             {...register("profileSchema.aboutMe")}
           />
         </FieldContent>
-        {errors.profileSchema?.aboutMe && (
-          <FieldError>{errors.profileSchema.aboutMe.message}</FieldError>
-        )}
+        {errors.profileSchema?.aboutMe && <FieldError>{errors.profileSchema.aboutMe.message}</FieldError>}
       </Field>
     </StepWrapper>
   );

@@ -22,7 +22,7 @@ const AppHeader = () => {
   const isDark = resolvedTheme === "dark";
 
   if (!mounted) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return (

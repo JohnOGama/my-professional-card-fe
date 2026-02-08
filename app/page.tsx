@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Plus } from "lucide-react"
+import Link from "next/link";
+import { Plus } from "lucide-react";
 
 export default function Page() {
   return (
@@ -9,7 +9,7 @@ export default function Page() {
         className="absolute inset-0 opacity-30 dark:opacity-20"
         style={{
           backgroundImage: `radial-gradient(circle, currentColor 1px, transparent 1px)`,
-          backgroundSize: '24px 24px',
+          backgroundSize: "24px 24px",
         }}
       />
 
@@ -37,5 +37,5 @@ export default function Page() {
         </div>
       </div>
     </div>
-  )
+  );
 }
